@@ -7,3 +7,12 @@ def edge_distance (do:float,t:float,fy:float)->tuple[float,float]:
     emax=12*t*eps
 
     return emin,emax
+
+def class_of_bolt(grade:float)->tuple[float,float]:
+    """
+    Returns fub and fyb
+    """
+    fub=int(grade)*100
+    dec=grade-int(grade)
+    fyb=dec*fub
+    return fub,round(fyb,1)
