@@ -28,3 +28,19 @@ def net_area_of_bolt(d:float):
     Anb=0.78*Asb
 
     return round(Anb,2)
+
+def hole_diameter(d:float):
+    """
+    IS 800:2007 (Clause 10.2.1), the diameter of a standard bolt hole (d₀) is larger than the nominal diameter of the bolt (d) 
+    to allow easy insertion and account for minor misalignments. For standard clearance holes, the extra clearance added to the bolt 
+    diameter depends on the bolt size: 1.0 mm extra for 12 to 14 mm bolts, 2.0 mm extra for 16 to 24 mm bolts, and 3.0 mm extra for bolts 
+    larger than 24 mm.
+    """
+    if d>12 and d<14:
+        do=d+1
+    elif d>16 and d<24:
+        do=d+2
+    elif d>24:
+        do=d+3
+
+    return do

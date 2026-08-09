@@ -11,3 +11,7 @@ def test_class_of_bolt():
 def test_net_area_of_bolt():
     Anb=steel_design_calcs.net_area_of_bolt(12)
     assert Anb==88.22
+
+def test_hole_diameter():
+    do=steel_design_calcs.hole_diameter(20)
+    assert do==22
