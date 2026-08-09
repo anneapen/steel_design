@@ -19,3 +19,7 @@ def test_hole_diameter():
 def test_min_pitch():
     p_min=steel_design_calcs.min_pitch(20)
     assert p_min==50
+
+def test_max_pitch():
+    p_max=steel_design_calcs.max_pitch(10,'compression')
+    assert p_max==120

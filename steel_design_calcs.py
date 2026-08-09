@@ -21,6 +21,19 @@ def min_pitch(d:float)->float:
     p_min=2.5*d
     return p_min
 
+def max_pitch(t:float,type:str)->float:
+    """
+    Returns the maximum pitch,p_max,mm
+    t-thickness of the thinner plate,mm
+    type-type of member(tension/compression)
+    """
+    if (type=='compression'):
+        p_max=min(12*t,200)
+    elif (type=='tension'):
+        p_max=min(16*t,200)
+
+    return p_max
+
 
 def class_of_bolt(grade:float)->tuple[float,float]:
     """
