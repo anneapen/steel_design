@@ -7,4 +7,7 @@ def test_edge_distance():
 def test_class_of_bolt():
     fub,fyb=steel_design_calcs.class_of_bolt(4.6)
     assert fub,fyb==(400,240.0)
-    
+
+def test_net_area_of_bolt():
+    Anb=steel_design_calcs.net_area_of_bolt(12)
+    assert Anb==88.22
