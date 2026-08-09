@@ -15,3 +15,7 @@ def test_net_area_of_bolt():
 def test_hole_diameter():
     do=steel_design_calcs.hole_diameter(20)
     assert do==22
+
+def test_min_pitch():
+    p_min=steel_design_calcs.min_pitch(20)
+    assert p_min==50
