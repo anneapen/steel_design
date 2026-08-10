@@ -10,29 +10,22 @@ def edge_distance (do:float,t:float,fy:float)->tuple[float,float]:
 
     return emin,emax
 
-def min_pitch(d:float)->float:
+def pitch(d:float,t:float,type:str)->tuple[float,float]:
     """
-    Returns the minimum pitch,p_min,mm
-    d-diameter of the bolt,mm 
+    Returns the minimum pitch,p_min,mm & maximum pitch,p_max,mm
+    d-diameter of the bolt,mm
+    t-thickness of the thinner plate,mm
+    type-type of member(tension/compression)
 
     IS 800:2007 (Clause 10.2.2), The distance between centre of fasteners shall not be
     less than 2.5 times the nominal diameter of the fastener.
     """
     p_min=2.5*d
-    return p_min
-
-def max_pitch(t:float,type:str)->float:
-    """
-    Returns the maximum pitch,p_max,mm
-    t-thickness of the thinner plate,mm
-    type-type of member(tension/compression)
-    """
     if (type=='compression'):
         p_max=min(12*t,200)
     elif (type=='tension'):
         p_max=min(16*t,200)
-
-    return p_max
+    return p_min,p_max
 
 
 def class_of_bolt(grade:float)->tuple[float,float]:
