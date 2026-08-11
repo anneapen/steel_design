@@ -63,3 +63,14 @@ def pitch(d:float,t:float,type:str)->tuple[float,float]:
         p_max=min(16*t,200)
     return p_min,p_max
 
+def tensile_strength_of_bolt(grade:float,d:float)->float:
+    """
+    returns the tensile strength of the bolt
+    """
+    fub=class_of_bolt(grade)[0]
+    Anb=net_area_of_bolt(d)
+    T_db=(0.9*fub*Anb)/1.25*10**-3
+    return round(T_db,2)
+
+
+

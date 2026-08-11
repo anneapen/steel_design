@@ -19,3 +19,7 @@ def test_edge_distance():
 def test_pitch():
     p_min,p_max=steel_design_calcs.pitch(20,10,'compression')
     assert p_min,p_max==(50.0,120)
+
+def test_tensile_strength_of_bolt():
+    T_db=steel_design_calcs.tensile_strength_of_bolt(4.6,20)
+    assert T_db==70.57
