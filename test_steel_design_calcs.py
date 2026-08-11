@@ -5,7 +5,7 @@ def test_class_of_bolt():
     assert fub,fyb==(400,240.0)
 
 def test_net_area_of_bolt():
-    Anb=steel_design_calcs.net_area_of_bolt(12)
+    Anb=steel_design_calcs.net_area_of_bolt(12)[0]
     assert Anb==88.22
 
 def test_hole_diameter():

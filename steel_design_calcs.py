@@ -17,7 +17,7 @@ def net_area_of_bolt(d:float)->float:
     Asb=math.pi/4*(d**2)
     Anb=0.78*Asb
 
-    return round(Anb,2)
+    return round(Anb,2),round(Asb,2)
 
 def hole_diameter(d:float)->float:
     """
@@ -68,7 +68,7 @@ def tensile_strength_of_bolt(grade:float,d:float)->float:
     returns the tensile strength of the bolt
     """
     fub=class_of_bolt(grade)[0]
-    Anb=net_area_of_bolt(d)
+    Anb=net_area_of_bolt(d)[0]
     T_db=(0.9*fub*Anb)/1.25*10**-3
     return round(T_db,2)
 
