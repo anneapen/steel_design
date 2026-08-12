@@ -107,3 +107,22 @@ def shear_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,t
     V_dsb=(fub/(math.sqrt(3)*1.25))*((nn*Anb)+(ns*Asb))*rf_lg*rf_lj*rf_pk*10**-3
     return round(V_dsb,2)
 
+def design_strength_of_butt_weld(lw:float,tmin:float,fy:float,weld_type:str,weld_penetration:str)->tuple[float,float]:
+   """
+   returns the design strength of weld
+   """
+   if (weld_penetration=='single'):
+    te=(5/8)*tmin
+   elif (weld_penetration=='single'):
+    te=tmin
+   if (weld_type=='shop weld'):
+      psf=1.25
+   elif (weld_type=='field weld'):
+      psf=1.5
+
+   T_dw=(fy/psf)*(lw*te)*10**-3
+   V_dw=0.57*(fy/psf)*(lw*te)*10**-3
+
+   return round(T_dw,2),round(V_dw,2)
+   
+

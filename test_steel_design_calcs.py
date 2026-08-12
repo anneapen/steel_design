@@ -31,3 +31,7 @@ def test_bearing_strength_of_bolt():
 def test_shear_strength_of_bolt():
     V_dsb=steel_design_calcs.shear_strength_of_bolt(4.6,20,1,0,150,50,5)
     assert V_dsb==45.27
+
+def test_design_strength_of_butt_weld():
+    T_dw=steel_design_calcs.design_strength_of_butt_weld(150,12,250,'shop weld','single')[0]
+    assert T_dw==225.0
