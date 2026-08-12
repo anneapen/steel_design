@@ -124,5 +124,19 @@ def design_strength_of_butt_weld(lw:float,tmin:float,fy:float,weld_type:str,weld
    V_dw=0.57*(fy/psf)*(lw*te)*10**-3
 
    return round(T_dw,2),round(V_dw,2)
-   
+
+def design_strength_of_fillet_weld(s:float,lw:float,weld_type:str,fu:float)->tuple[float,float]:
+    """
+    returns the design strength of weld
+    """
+    
+    tt=0.7*s
+    if (weld_type=='shop weld'):
+          psf=1.25
+    elif (weld_type=='field weld'):
+          psf=1.5
+    T_dw=(fu/psf)*(lw*tt)*10**-3
+    V_dw=(fu/(math.sqrt(3)*psf))*(lw*tt)*10**-3
+    return round(T_dw,2),round(V_dw,2)
+
 

@@ -35,3 +35,7 @@ def test_shear_strength_of_bolt():
 def test_design_strength_of_butt_weld():
     T_dw=steel_design_calcs.design_strength_of_butt_weld(150,12,250,'shop weld','single')[0]
     assert T_dw==225.0
+
+def test_design_strength_of_fillet_weld():
+    V_dw=steel_design_calcs.design_strength_of_fillet_weld(6,216,'shop weld',410)[1]
+    assert V_dw==171.8
