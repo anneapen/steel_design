@@ -72,5 +72,16 @@ def tensile_strength_of_bolt(grade:float,d:float)->float:
     T_db=(0.9*fub*Anb)/1.25*10**-3
     return round(T_db,2)
 
+def bearing_strength_of_bolt(d:float,fu:float,grade:float,tmin:float)->float:
+    """
+    returns the bearing strength of the bolt
+    """
+    e=edge_distance(d,tmin,fu)[0]
+    p=pitch(d,tmin,'compression')[0]
+    do=hole_diameter(d)
+    fub=class_of_bolt(grade)[0]
+    kb=min((e/(3*do)),((p/(3*do))-0.25),(fu/fub),1)
+    V_dpb=(2.5*kb*fu*(d*tmin))/1.25*10**-3
+    return round(V_dpb,2)
 
 

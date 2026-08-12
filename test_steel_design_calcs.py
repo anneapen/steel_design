@@ -23,3 +23,7 @@ def test_pitch():
 def test_tensile_strength_of_bolt():
     T_db=steel_design_calcs.tensile_strength_of_bolt(4.6,20)
     assert T_db==70.57
+
+def test_bearing_strength_of_bolt():
+    V_dpb=steel_design_calcs.bearing_strength_of_bolt(20,410,4.6,14)
+    assert V_dpb==114.8
