@@ -84,4 +84,26 @@ def bearing_strength_of_bolt(d:float,fu:float,grade:float,tmin:float)->float:
     V_dpb=(2.5*kb*fu*(d*tmin))/1.25*10**-3
     return round(V_dpb,2)
 
+def shear_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,tpk:float)->float:
+    """
+    returns the shear strength of the bolt
+    """
+    fub=class_of_bolt(grade)[0]
+    Anb,Asb=net_area_of_bolt(d)
+    if lj>(15*d):
+     rf_lj=1.075-(lj/(200*d))
+     rf_lj = max(0.75, min(rf_lj, 1.0))
+    else:
+     rf_lj=1
+    if lg>(5*d):
+     rf_lg=(8*d)/(lg+(3*d))
+     rf_lg = min(rf_lg, rf_lj)
+    else:
+     rf_lg=1
+    if tpk>6:
+     rf_pk=1-(0.0125*tpk)
+    else:
+     rf_pk=1
+    V_dsb=(fub/(math.sqrt(3)*1.25))*((nn*Anb)+(ns*Asb))*rf_lg*rf_lj*rf_pk*10**-3
+    return round(V_dsb,2)
 

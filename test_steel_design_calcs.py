@@ -27,3 +27,7 @@ def test_tensile_strength_of_bolt():
 def test_bearing_strength_of_bolt():
     V_dpb=steel_design_calcs.bearing_strength_of_bolt(20,410,4.6,14)
     assert V_dpb==114.8
+
+def test_shear_strength_of_bolt():
+    V_dsb=steel_design_calcs.shear_strength_of_bolt(4.6,20,1,0,150,50,5)
+    assert V_dsb==45.27
