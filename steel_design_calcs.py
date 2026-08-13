@@ -202,7 +202,33 @@ def imperfection_factor(buckling_class:str)->float:
         
     return alpha
 
-def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float)->float:
+def effective_length_factor(condition: str) -> float:
+    """
+    Returns effective length factor K
+    as per IS 800:2007 Table 11.
+    """
+
+    if condition == "fixed_fixed":
+        K = 0.65
+
+    elif condition == "fixed_pinned":
+        K = 0.80
+
+    elif condition == "pinned_pinned":
+        K = 1.00
+
+    elif condition == "fixed_guided":
+        K = 1.20
+
+    elif condition == "fixed_free":
+        K = 2.00
+
+    else:
+        raise ValueError("Invalid end restraint condition")
+
+    return K
+
+def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float,condition:str)->float:
     """
     to determine the design compressive strength of the member
     """
@@ -211,7 +237,7 @@ def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float)->fl
     rzz,ryy=section[4],section[5]
     buckling_class=section[6]
     rmin=min(rzz,ryy)*10
-    K=0.65
+    K=effective_length_factor(condition)
     E=2*10**5
     
     fcc=(math.pi**2*E)/(((K*L*1000)/rmin)**2)

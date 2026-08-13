@@ -55,8 +55,12 @@ def test_imperfection_factor():
     alpha=steel_design_calcs.imperfection_factor('b')
     assert alpha==0.34
 
+def test_effective_length_factor():
+    K=steel_design_calcs.effective_length_factor('fixed_fixed')
+    assert K==0.65
+
 def test_design_compressive_strength():
-    Pcd=steel_design_calcs.design_compressive_strength('ISHB 350',710.20,4,250,1.1)
+    Pcd=steel_design_calcs.design_compressive_strength('ISHB 350',710.20,4,250,1.1,'fixed_fixed')
     assert Pcd==1794.69
     
 
