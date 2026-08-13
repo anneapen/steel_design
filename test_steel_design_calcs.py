@@ -50,6 +50,10 @@ def test_rolled_steel_beam():
     assert rzz ==14.65
     assert ryy==5.22
     assert buckling_class=='c'
+
+def test_imperfection_factor():
+    alpha=steel_design_calcs.imperfection_factor('b')
+    assert alpha==0.34
     
 
     

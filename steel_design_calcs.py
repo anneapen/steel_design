@@ -161,6 +161,8 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str
     rzz = steel_beam["rzz"]
     ryy = steel_beam["ryy"]
 
+    # Determining buckling class
+
     rmin=min(ryy,rzz)
     if h/bf>12 and tf<=40:
         if rmin==rzz:
@@ -184,4 +186,19 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str
             buckling_class='d'
 
     return Area, h, bf, tf, rzz, ryy,buckling_class
+
+def imperfection_factor(buckling_class:str)->float:
+    """
+    """
+    if (buckling_class=='a'):
+        alpha=0.21
+    elif (buckling_class=='b'):
+        alpha=0.34
+    elif (buckling_class=='c'):
+        alpha=0.49
+    elif (buckling_class=='d'):
+        alpha=0.76
+        
+    return alpha
+    
 
