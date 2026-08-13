@@ -1,4 +1,6 @@
 import math
+import pandas as pd
+
 
 def class_of_bolt(grade:float)->tuple[float,float]:
     """
@@ -141,4 +143,23 @@ def design_strength_of_fillet_weld(s:float,lw:float,weld_type:str,fu:float)->tup
     V_dw=(fu/(math.sqrt(3)*psf))*(lw*tt)*10**-3
     return round(T_dw,2),round(V_dw,2)
 
+
+def rolled_steel_beam(beam:str,W:float)->float:
+    """
+    """
+    df=pd.read_csv('steel_tables_is.csv')
+    df=df.set_index('Section')
+    rolled_steel_beam=df.copy()
+    condition = ((rolled_steel_beam.index == beam) & (rolled_steel_beam["W_N/m"] == W))
+    steel_beam = rolled_steel_beam.loc[condition].iloc[0]
+    
+
+    Area = steel_beam["Area"]
+    h = steel_beam["h"]
+    bf = steel_beam["bf"]
+    tf = steel_beam["tf"]
+    rxx = steel_beam["rxx"]
+    ryy = steel_beam["ryy"]
+
+    return Area, h, bf, tf, rxx, ryy
 

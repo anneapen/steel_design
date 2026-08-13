@@ -1,5 +1,6 @@
 import steel_design_calcs as steel_design_calcs
 
+
 def test_class_of_bolt():
     fub,fyb=steel_design_calcs.class_of_bolt(4.6)
     assert fub,fyb==(400,240.0)
@@ -39,3 +40,15 @@ def test_design_strength_of_butt_weld():
 def test_design_strength_of_fillet_weld():
     V_dw=steel_design_calcs.design_strength_of_fillet_weld(6,216,'shop weld',410)[1]
     assert V_dw==171.8
+
+def test_rolled_steel_beam():
+    Area,h,bf,tf,rxx,ryy=steel_design_calcs.rolled_steel_beam("ISHB 350", 710.20)
+    assert Area ==92.21
+    assert h==350
+    assert bf==250
+    assert tf==11.6
+    assert rxx ==14.65
+    assert ryy ==5.22
+    
+
+    
