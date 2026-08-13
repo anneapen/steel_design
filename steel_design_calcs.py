@@ -164,22 +164,22 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str
     # Determining buckling class
 
     rmin=min(ryy,rzz)
-    if h/bf>12 and tf<=40:
+    if h/bf>1.2 and tf<=40:
         if rmin==rzz:
             buckling_class='a'
         elif rmin==ryy:
             buckling_class='b'
-    elif h/bf>12 and 40<=tf<=100:
+    elif h/bf>1.2 and 40<=tf<=100:
         if rmin==rzz:
             buckling_class='b'
         elif rmin==ryy:
             buckling_class='c'
-    elif h/bf<=12 and tf<=100:
+    elif h/bf<=1.2 and tf<=100:
         if rmin==rzz:
             buckling_class='b'
         elif rmin==ryy:
             buckling_class='c'
-    elif h/bf<=12 and tf>100:
+    elif h/bf<=1.2 and tf>100:
         if rmin==rzz:
             buckling_class='d'
     elif rmin==ryy:
@@ -189,6 +189,7 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str
 
 def imperfection_factor(buckling_class:str)->float:
     """
+    Returns the imperfection factor for the given buckling class
     """
     if (buckling_class=='a'):
         alpha=0.21
@@ -200,5 +201,26 @@ def imperfection_factor(buckling_class:str)->float:
         alpha=0.76
         
     return alpha
+
+def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float)->float:
+    """
+    to determine the design compressive strength of the member
+    """
+    section=rolled_steel_beam(beam,W)
+    Area=section[0]
+    rzz,ryy=section[4],section[5]
+    buckling_class=section[6]
+    rmin=min(rzz,ryy)*10
+    K=0.65
+    E=2*10**5
     
+    fcc=(math.pi**2*E)/(((K*L*1000)/rmin)**2)
+    lamda=math.sqrt(fy/fcc)
+    buckling_class=section[6]
+    alpha=imperfection_factor(buckling_class)
+    phi=0.5*(1+(alpha*(lamda-0.2))+(lamda**2))
+    fcd=(fy/psf)/(phi+math.sqrt((phi**2)-(lamda**2)))
+    Pcd=fcd*Area*100*10**-3
+
+    return round(Pcd,2)
 

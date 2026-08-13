@@ -49,11 +49,15 @@ def test_rolled_steel_beam():
     assert tf==11.6
     assert rzz ==14.65
     assert ryy==5.22
-    assert buckling_class=='c'
+    assert buckling_class=='b'
 
 def test_imperfection_factor():
     alpha=steel_design_calcs.imperfection_factor('b')
     assert alpha==0.34
+
+def test_design_compressive_strength():
+    Pcd=steel_design_calcs.design_compressive_strength('ISHB 350',710.20,4,250,1.1)
+    assert Pcd==1794.69
     
 
     
