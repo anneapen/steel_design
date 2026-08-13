@@ -158,8 +158,8 @@ def rolled_steel_beam(beam:str,W:float)->float:
     h = steel_beam["h"]
     bf = steel_beam["bf"]
     tf = steel_beam["tf"]
-    rxx = steel_beam["rxx"]
+    rzz = steel_beam["rzz"]
     ryy = steel_beam["ryy"]
 
-    return Area, h, bf, tf, rxx, ryy
+    return Area, h, bf, tf, rzz, ryy
 
