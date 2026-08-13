@@ -144,7 +144,7 @@ def design_strength_of_fillet_weld(s:float,lw:float,weld_type:str,fu:float)->tup
     return round(T_dw,2),round(V_dw,2)
 
 
-def rolled_steel_beam(beam:str,W:float)->float:
+def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str]:
     """
     """
     df=pd.read_csv('steel_tables_is.csv')
@@ -161,5 +161,27 @@ def rolled_steel_beam(beam:str,W:float)->float:
     rzz = steel_beam["rzz"]
     ryy = steel_beam["ryy"]
 
-    return Area, h, bf, tf, rzz, ryy
+    rmin=min(ryy,rzz)
+    if h/bf>12 and tf<=40:
+        if rmin==rzz:
+            buckling_class='a'
+        elif rmin==ryy:
+            buckling_class='b'
+    elif h/bf>12 and 40<=tf<=100:
+        if rmin==rzz:
+            buckling_class='b'
+        elif rmin==ryy:
+            buckling_class='c'
+    elif h/bf<=12 and tf<=100:
+        if rmin==rzz:
+            buckling_class='b'
+        elif rmin==ryy:
+            buckling_class='c'
+    elif h/bf<=12 and tf>100:
+        if rmin==rzz:
+            buckling_class='d'
+    elif rmin==ryy:
+            buckling_class='d'
+
+    return Area, h, bf, tf, rzz, ryy,buckling_class
 

@@ -42,13 +42,14 @@ def test_design_strength_of_fillet_weld():
     assert V_dw==171.8
 
 def test_rolled_steel_beam():
-    Area,h,bf,tf,rzz,ryy=steel_design_calcs.rolled_steel_beam("ISHB 350", 710.20)
+    Area,h,bf,tf,rzz,ryy,buckling_class=steel_design_calcs.rolled_steel_beam("ISHB 350", 710.20)
     assert Area ==92.21
     assert h==350
     assert bf==250
     assert tf==11.6
     assert rzz ==14.65
-    assert ryy ==5.22
+    assert ryy==5.22
+    assert buckling_class=='c'
     
 
     
