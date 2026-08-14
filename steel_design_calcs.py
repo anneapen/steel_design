@@ -23,6 +23,8 @@ def net_area_of_bolt(d:float)->float:
 
 def hole_diameter(d:float)->float:
     """
+    Returns the diameter of the hole (in mm) for the diameter of bolt(d),mm
+
     IS 800:2007 (Clause 10.2.1), the diameter of a standard bolt hole (d₀) is larger than the nominal diameter of the bolt (d) 
     to allow easy insertion and account for minor misalignments. For standard clearance holes, the extra clearance added to the bolt 
     diameter depends on the bolt size: 1.0 mm extra for 12 to 14 mm bolts, 2.0 mm extra for 16 to 24 mm bolts, and 3.0 mm extra for bolts 
@@ -39,7 +41,11 @@ def hole_diameter(d:float)->float:
 
 def edge_distance (d:float,t:float,fy:float)->tuple[float,float]:
     """
-    Returns the maximum and minimum edge/end distance
+    Returns the maximum and minimum edge/end distance in mm as per IS 800:2007 Cl.10.2.4
+
+    where,  d-diameter of the bolt,mm
+            t- thickness of the thinner plate,mm
+            fy-the yield stress (yield strength) of the steel plate, in MPa
     """
     do=hole_diameter(d)
     emin=1.5*do
@@ -50,13 +56,11 @@ def edge_distance (d:float,t:float,fy:float)->tuple[float,float]:
 
 def pitch(d:float,t:float,type:str)->tuple[float,float]:
     """
-    Returns the minimum pitch,p_min,mm & maximum pitch,p_max,mm
-    d-diameter of the bolt,mm
-    t-thickness of the thinner plate,mm
-    type-type of member(tension/compression)
+    Returns the minimum pitch,p_min,mm & maximum pitch,p_max,mm as per IS 800:2007 Cl.10.2.2 & Cl. 10.2.3
 
-    IS 800:2007 (Clause 10.2.2), The distance between centre of fasteners shall not be
-    less than 2.5 times the nominal diameter of the fastener.
+    where,  d-diameter of the bolt,mm
+            t-thickness of the thinner plate,mm
+            type-type of member(tension/compression)
     """
     p_min=2.5*d
     if (type=='compression'):
@@ -67,7 +71,8 @@ def pitch(d:float,t:float,type:str)->tuple[float,float]:
 
 def tensile_strength_of_bolt(grade:float,d:float)->float:
     """
-    returns the tensile strength of the bolt
+    Returns the tensile strength of the bolt,T_db(kN) as per IS 800:2007 Cl.10.3.5
+    for the given grade of bolt and diameter of the bolt(d),mm
     """
     fub=class_of_bolt(grade)[0]
     Anb=net_area_of_bolt(d)[0]
@@ -76,7 +81,10 @@ def tensile_strength_of_bolt(grade:float,d:float)->float:
 
 def bearing_strength_of_bolt(d:float,fu:float,grade:float,tmin:float)->float:
     """
-    returns the bearing strength of the bolt
+    Returns the bearing strength of the bolt,V_dpb(kN) as per IS 800:2007 Cl.10.3.4
+    where, d=nominal diameter of the bolt,mm
+            fu=ultimate tensile stress of the plate,MPa
+            grade=grade of bolt
     """
     e=edge_distance(d,tmin,fu)[0]
     p=pitch(d,tmin,'compression')[0]
