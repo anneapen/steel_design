@@ -1,0 +1,33 @@
+import bolts as bolts
+
+def test_class_of_bolt():
+    fub,fyb=bolts.class_of_bolt(4.6)
+    assert fub,fyb==(400,240.0)
+
+def test_net_area_of_bolt():
+    Anb=bolts.net_area_of_bolt(12)[0]
+    assert Anb==88.22
+
+def test_hole_diameter():
+    do=bolts.hole_diameter(20)
+    assert do==22
+
+def test_edge_distance():
+    emin,emax=bolts.edge_distance(20,10,250)
+    assert emin,emax==(33.0, 120.0)
+
+def test_pitch():
+    p_min,p_max=bolts.pitch(20,10,'compression')
+    assert p_min,p_max==(50.0,120)
+
+def test_tensile_strength_of_bolt():
+    T_db=bolts.tensile_strength_of_bolt(4.6,20)
+    assert T_db==70.57
+
+def test_bearing_strength_of_bolt():
+    V_dpb=bolts.bearing_strength_of_bolt(20,410,4.6,14)
+    assert V_dpb==114.8
+
+def test_shear_strength_of_bolt():
+    V_dsb=bolts.shear_strength_of_bolt(4.6,20,1,0,150,50,5)
+    assert V_dsb==45.27
