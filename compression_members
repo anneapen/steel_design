@@ -1,4 +1,5 @@
 import math
+import sections as sections
 
 def effective_length_factor(condition: str) -> float:
     """
@@ -30,7 +31,7 @@ def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float,cond
     """
     to determine the design compressive strength of the member
     """
-    section=rolled_steel_beam(beam,W)
+    section=sections.rolled_steel_beam(beam,W)
     Area=section[0]
     rzz,ryy=section[4],section[5]
     buckling_class=section[6]
@@ -41,7 +42,7 @@ def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float,cond
     fcc=(math.pi**2*E)/(((K*L*1000)/rmin)**2)
     lamda=math.sqrt(fy/fcc)
     buckling_class=section[6]
-    alpha=imperfection_factor(buckling_class)
+    alpha=sections.imperfection_factor(buckling_class)
     phi=0.5*(1+(alpha*(lamda-0.2))+(lamda**2))
     fcd=(fy/psf)/(phi+math.sqrt((phi**2)-(lamda**2)))
     Pcd=fcd*Area*100*10**-3
