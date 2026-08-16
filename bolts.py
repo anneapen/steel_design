@@ -79,24 +79,35 @@ def tensile_strength_of_bolt(grade:float,d:float)->float:
     T_db=(0.9*fub*Anb)/1.25*10**-3
     return round(T_db,2)
 
-def bearing_strength_of_bolt(d:float,fu:float,grade:float,tmin:float)->float:
+def bearing_strength_of_bolt(d:float,fu:float,grade:float,tmin:float,t:float)->float:
     """
     Returns the bearing strength of the bolt,V_dpb(kN) as per IS 800:2007 Cl.10.3.4
     where, d=nominal diameter of the bolt,mm
             fu=ultimate tensile stress of the plate,MPa
             grade=grade of bolt
+            tmin=thickness of the thinner plate,mm
+            t= summation of the thicknesses of the connected plates experiencing bearing stress in the same direction, 
+                or if the bolts are countersunk,the thickness of the plate minus one half of the depth of countersinking
     """
     e=edge_distance(d,tmin,fu)[0]
     p=pitch(d,tmin,'compression')[0]
     do=hole_diameter(d)
     fub=class_of_bolt(grade)[0]
     kb=min((e/(3*do)),((p/(3*do))-0.25),(fu/fub),1)
-    V_dpb=(2.5*kb*fu*(d*tmin))/1.25*10**-3
+    V_dpb=(2.5*kb*fu*(d*t))/1.25*10**-3
     return round(V_dpb,2)
 
 def shear_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,tpk:float)->float:
     """
-    returns the shear strength of the bolt
+    Returns the shear strength of the bolt, V_dsb(kN) as per IS 800:2007 Cl.10.3.4
+    where,  grade=grade of bolt
+            d=nominal diameter of the bolt,mm
+            nn=number of shear planes with threads intercepting the shear plane;
+            ns=number of shear planes without threads intercepting the shear plane;
+            lj=length of the joint, mm
+            lg=grip length(equal to the total thickness of the connected plates),mm
+            tP=thickness of the thicker packing, in mm.
+
     """
     fub=class_of_bolt(grade)[0]
     Anb,Asb=net_area_of_bolt(d)
