@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str]:
+def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float]:
     """
     """
     df=pd.read_csv('steel_tables_is.csv')
@@ -18,9 +18,20 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str
     rzz = steel_beam["rzz"]
     ryy = steel_beam["ryy"]
 
-    # Determining buckling class
+    return Area, h, bf, tf, rzz, ryy
 
+def buckling_class(beam:str,W:float)->str:
+    """
+    Returns the buckling class of the member
+    """   
+    section=rolled_steel_beam(beam,W)
+    h=section[1]
+    bf=section[2]
+    tf=section[3]
+    rzz,ryy=section[4],section[5]
+        
     rmin=min(ryy,rzz)
+
     if h/bf>1.2 and tf<=40:
         if rmin==rzz:
             buckling_class='a'
@@ -39,10 +50,10 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float,str
     elif h/bf<=1.2 and tf>100:
         if rmin==rzz:
             buckling_class='d'
-    elif rmin==ryy:
+        elif rmin==ryy:
             buckling_class='d'
 
-    return Area, h, bf, tf, rzz, ryy,buckling_class
+    return buckling_class
 
 def imperfection_factor(buckling_class:str)->float:
     """
