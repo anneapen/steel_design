@@ -17,3 +17,11 @@ def test_buckling_class():
 def test_imperfection_factor():
     alpha=sections.imperfection_factor('b')
     assert alpha==0.34
+
+def test_rolled_steel_channel():
+    Area, h, b, tf,tw, rxx, ryy=sections.rolled_steel_channel('ISJC 100',56.9)
+    assert (Area,h,b,tf,tw, rxx, ryy)==(7.41, 100.0, 45.0, 5.1, 3.0, 4.09, 1.42)
+
+def test_rolled_steel_equal_angle():
+    Area, t,Ixx,rxx=sections.rolled_steel_equal_angle("ISA 2020",8.8)
+    assert (Area, t,Ixx,rxx)==(1.12, 3.0, 0.4, 0.58)
