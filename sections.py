@@ -4,7 +4,7 @@ import pandas as pd
 def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float]:
     """
     """
-    df=pd.read_csv('steel_tables_is.csv')
+    df=pd.read_csv('rolled_steel_beams.csv')
     df=df.set_index('Section')
     rolled_steel_beam=df.copy()
     condition = ((rolled_steel_beam.index == beam) & (rolled_steel_beam["W_N/m"] == W))
