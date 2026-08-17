@@ -91,3 +91,20 @@ def rolled_steel_channel(channel:str,W:float)->float:
 
     return Area, h, b, tf,tw, rxx, ryy
 
+def rolled_steel_equal_angle(equal_angle:str,W:float)->float:
+    """
+    """
+    df=pd.read_csv('rolled_steel_equal_angles.csv')
+    df=df.set_index('Section')
+    rolled_steel_equal_angle=df.copy()
+    condition = ((rolled_steel_equal_angle.index == equal_angle) & (rolled_steel_equal_angle["W_N"] == W))
+    steel_equal_angle = rolled_steel_equal_angle.loc[condition].iloc[0]
+    
+
+    Area = steel_equal_angle["Area"]
+    t = steel_equal_angle["t"]
+    Ixx = steel_equal_angle["Ixx_Iyy"]
+    rxx = steel_equal_angle["rxx_ryy"]
+    
+
+    return Area, t,Ixx,rxx
