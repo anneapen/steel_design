@@ -128,6 +128,16 @@ def shear_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,t
     V_dsb=(fub/(math.sqrt(3)*1.25))*((nn*Anb)+(ns*Asb))*rf_lg*rf_lj*rf_pk*10**-3
     return round(V_dsb,2)
 
+def design_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,tpk:float,
+                            fu:float,tmin:float,t:float)->float:
+    """
+    """
+    V_dsb=shear_strength_of_bolt(grade,d,nn,ns,lj,lg,tpk)
+    V_dpb=bearing_strength_of_bolt(d,fu,grade,tmin,t)
+    T_db=tensile_strength_of_bolt(grade,d)
+    Vb=min(V_dsb,V_dpb,T_db)
+    return round(Vb,2)
+
 
 
 

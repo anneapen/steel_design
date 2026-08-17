@@ -31,3 +31,7 @@ def test_bearing_strength_of_bolt():
 def test_shear_strength_of_bolt():
     V_dsb=bolts.shear_strength_of_bolt(4.6,20,1,0,150,50,5)
     assert V_dsb==45.27
+
+def test_design_strength_of_bolt():
+    Vb=bolts.design_strength_of_bolt(4.6,20,1,0,150,50,5,410,14,28)
+    assert Vb==45.27
