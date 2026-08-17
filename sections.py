@@ -69,3 +69,25 @@ def imperfection_factor(buckling_class:str)->float:
         alpha=0.76
         
     return alpha
+
+def rolled_steel_channel(channel:str,W:float)->float:
+    """
+    Returns the section properties of the given channel
+    """
+    df=pd.read_csv('rolled_steel_channels.csv')
+    df=df.set_index('Section')
+    rolled_steel_channel=df.copy()
+    condition = ((rolled_steel_channel.index == channel) & (rolled_steel_channel["W_N"] == W))
+    steel_channel = rolled_steel_channel.loc[condition].iloc[0]
+    
+
+    Area = steel_channel["Area"]
+    h = steel_channel["h"]
+    b = steel_channel["b"]
+    tf = steel_channel["tf"]
+    tw = steel_channel["tw"]
+    rxx = steel_channel["rxx"]
+    ryy = steel_channel["ryy"]
+
+    return Area, h, b, tf,tw, rxx, ryy
+
