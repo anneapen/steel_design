@@ -126,3 +126,25 @@ def rolled_steel_unequal_angle(unequal_angle:str,W:float)->float:
     ryy = steel_unequal_angle["ryy"]    
 
     return Area, t,Ixx,Iyy,rxx,ryy
+
+def rolled_steel_tee_bar(tee_bar:str,W:float)->float:
+    """
+    """
+    df=pd.read_csv('rolled_steel_tee_bars.csv')
+    df=df.set_index('Section')
+    rolled_steel_tee_bar=df.copy()
+    condition = ((rolled_steel_tee_bar.index == tee_bar) & (rolled_steel_tee_bar["W_N"] == W))
+    steel_tee_bar = rolled_steel_tee_bar.loc[condition].iloc[0]
+    
+
+    Area = steel_tee_bar["Area"]
+    h = steel_tee_bar["h"]
+    b = steel_tee_bar["b"]
+    tf = steel_tee_bar["tf"]
+    tw = steel_tee_bar["tw"]
+    Ixx = steel_tee_bar["Ixx"]
+    Iyy = steel_tee_bar["Iyy"]
+    rxx = steel_tee_bar["rxx"]
+    ryy = steel_tee_bar["ryy"]    
+
+    return Area, h,b,tf,tw,Ixx,Iyy,rxx,ryy
