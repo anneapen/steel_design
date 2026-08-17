@@ -25,3 +25,11 @@ def test_rolled_steel_channel():
 def test_rolled_steel_equal_angle():
     Area, t,Ixx,rxx=sections.rolled_steel_equal_angle("ISA 2020",8.8)
     assert (Area, t,Ixx,rxx)==(1.12, 3.0, 0.4, 0.58)
+
+def test_rolled_steel_unequal_angle():
+    Area, t,Ixx,Iyy,rxx,ryy=sections.rolled_steel_unequal_angle("ISA 3020",10.8)
+    assert (Area, t,Ixx,Iyy,rxx,ryy)==(1.41, 3.0, 1.2, 0.4, 0.92, 0.54)
+
+def test_rolled_steel_tee_bar():
+    Area, h,b,tf,tw,Ixx,Iyy,rxx,ryy=sections.rolled_steel_tee_bar("ISNT 20",8.8)
+    assert (Area, h,b,tf,tw,Ixx,Iyy,rxx,ryy)==(1.13, 20.0, 20.0, 3.0, 3.0, 0.4, 0.2, 0.59, 0.39)
