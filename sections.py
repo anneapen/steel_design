@@ -104,7 +104,25 @@ def rolled_steel_equal_angle(equal_angle:str,W:float)->float:
     Area = steel_equal_angle["Area"]
     t = steel_equal_angle["t"]
     Ixx = steel_equal_angle["Ixx_Iyy"]
-    rxx = steel_equal_angle["rxx_ryy"]
-    
+    rxx = steel_equal_angle["rxx_ryy"]   
 
     return Area, t,Ixx,rxx
+
+def rolled_steel_unequal_angle(unequal_angle:str,W:float)->float:
+    """
+    """
+    df=pd.read_csv('rolled_steel_unequal_angles.csv')
+    df=df.set_index('Section')
+    rolled_steel_unequal_angle=df.copy()
+    condition = ((rolled_steel_unequal_angle.index == unequal_angle) & (rolled_steel_unequal_angle["W_N"] == W))
+    steel_unequal_angle = rolled_steel_unequal_angle.loc[condition].iloc[0]
+    
+
+    Area = steel_unequal_angle["Area"]
+    t = steel_unequal_angle["t"]
+    Ixx = steel_unequal_angle["Ixx"]
+    Iyy = steel_unequal_angle["Iyy"]
+    rxx = steel_unequal_angle["rxx"]
+    ryy = steel_unequal_angle["ryy"]    
+
+    return Area, t,Ixx,Iyy,rxx,ryy
