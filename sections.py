@@ -93,6 +93,7 @@ def rolled_steel_channel(channel:str,W:float)->float:
 
 def rolled_steel_equal_angle(equal_angle:str,W:float)->float:
     """
+    Returns the section properties of the given equal angle
     """
     df=pd.read_csv('rolled_steel_equal_angles.csv')
     df=df.set_index('Section')
@@ -110,6 +111,7 @@ def rolled_steel_equal_angle(equal_angle:str,W:float)->float:
 
 def rolled_steel_unequal_angle(unequal_angle:str,W:float)->float:
     """
+    Returns the section properties of the given unequal angle
     """
     df=pd.read_csv('rolled_steel_unequal_angles.csv')
     df=df.set_index('Section')
@@ -129,6 +131,7 @@ def rolled_steel_unequal_angle(unequal_angle:str,W:float)->float:
 
 def rolled_steel_tee_bar(tee_bar:str,W:float)->float:
     """
+    Returns the section properties of the given tee bar
     """
     df=pd.read_csv('rolled_steel_tee_bars.csv')
     df=df.set_index('Section')
