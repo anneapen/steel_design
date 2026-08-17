@@ -15,3 +15,7 @@ def test_net_section_rupture_angles_channels():
 def test_block_shear_failure():
     T_db=tension_members.block_shear_failure(410,250,1600,190,1050,300)
     assert T_db==247.14
+
+def test_design_tensile_strength():
+    T_d=tension_members.design_tensile_strength(250,1500,410,1060,1800,390,1300,500)
+    assert T_d==312.91
