@@ -13,5 +13,5 @@ def test_net_section_rupture_angles_channels():
     assert T_dn==264.2
 
 def test_block_shear_failure():
-    T_db1,Tdb2=tension_members.block_shear_failure(410,250,1600,190,1050,300)
-    assert T_db1,Tdb2==(266.03, 247.14)
+    T_db=tension_members.block_shear_failure(410,250,1600,190,1050,300)
+    assert T_db==247.14

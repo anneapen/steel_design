@@ -31,4 +31,5 @@ def block_shear_failure(fu:float,fy:float,Avg:float,Atn:float,Avn:float,Atg:floa
     gamma_m1=1.25
     T_db1 = ((fy * Avg) / (math.sqrt(3) * gamma_m0)+ (0.9 * fu * Atn) / gamma_m1) * 10**-3
     T_db2 = ((0.9 * fu * Avn) / (math.sqrt(3) * gamma_m1)+ (fy * Atg) / gamma_m0) * 10**-3
-    return round(T_db1,2),round(T_db2,2)
+    T_db= min(T_db1,T_db2)
+    return round(T_db,2)
