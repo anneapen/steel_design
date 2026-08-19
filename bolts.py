@@ -106,7 +106,7 @@ def shear_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,t
             ns=number of shear planes without threads intercepting the shear plane;
             lj=length of the joint, mm
             lg=grip length(equal to the total thickness of the connected plates),mm
-            tP=thickness of the thicker packing, in mm.
+            tpk=thickness of the thicker packing, in mm.
 
     """
     fub=class_of_bolt(grade)[0]
@@ -131,6 +131,20 @@ def shear_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,t
 def design_strength_of_bolt(grade:float,d:float,nn:int,ns:int,lj:float,lg:float,tpk:float,
                             fu:float,tmin:float,t:float)->float:
     """
+    Returns the design shear strength of the bolt, V_db(kN) as per IS 800:2007 
+    where,  grade=grade of bolt      
+            d=nominal diameter of the bolt,mm
+            nn=number of shear planes with threads intercepting the shear plane;
+            ns=number of shear planes without threads intercepting the shear plane;
+            lj=length of the joint, mm
+            lg=grip length(equal to the total thickness of the connected plates),mm
+            tpk=thickness of the thicker packing, in mm.
+            fu=ultimate tensile stress of the plate,MPa
+            tmin=thickness of the thinner plate,mm
+            t= summation of the thicknesses of the connected plates experiencing bearing stress in the same direction, 
+               or if the bolts are countersunk,the thickness of the plate minus one half of the depth of countersinking
+           
+                
     """
     V_dsb=shear_strength_of_bolt(grade,d,nn,ns,lj,lg,tpk)
     V_dpb=bearing_strength_of_bolt(d,fu,grade,tmin,t)
