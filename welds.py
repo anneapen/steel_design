@@ -2,7 +2,7 @@ import math
 
 def design_strength_of_butt_weld(lw:float,tmin:float,fy:float,fu:float,weld_type:str,weld_penetration:str)->tuple[float,float]:
    """
-   returns the design strength of weld
+   Returns the design strength of weld as per IS 800:2007 Cl.10.5.7
    """
    if (weld_penetration=='single'):
     te=(5/8)*tmin
