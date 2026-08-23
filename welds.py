@@ -22,6 +22,7 @@ def design_strength_of_butt_weld(lw:float,tmin:float,fy:float,fu:float,weld_type
 
 def angle_of_fusion(theta:float)->float:
     """
+    Returns the value of K for the given angle of fusion(in deg)
     """
     if 60<theta<90:
         K=0.7
@@ -39,7 +40,7 @@ def angle_of_fusion(theta:float)->float:
 
 def design_strength_of_fillet_weld(s:float,lw:float,weld_type:str,fu:float,theta:float)->tuple[float,float]:
     """
-    returns the design strength of weld
+    Returns the design strength of weld as per IS 800:2007 Cl.10.5.7
     """
     
     K=angle_of_fusion(theta)
