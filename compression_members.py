@@ -29,7 +29,13 @@ def effective_length_factor(condition: str) -> float:
 
 def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float,condition:str)->float:
     """
-    to determine the design compressive strength of the member
+    Returns the design compressive strength of the member as per Cl.7.1 of IS 800:2007
+    where, beam=the beam section
+            W=weight of the beam
+            L=length of the beam
+            fy=yield stress,MPa
+            psf=partial safety factor
+            condition=support condition of the beam
     """
     section=sections.rolled_steel_beam(beam,W)
     Area=section[0]
