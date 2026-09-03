@@ -3,7 +3,7 @@ import sections as sections
 
 def effective_length_factor(condition: str) -> float:
     """
-    Returns effective length factor K
+    Returns effective length factor K for the given support conditions
     as per IS 800:2007 Table 11.
     """
 
@@ -30,7 +30,9 @@ def effective_length_factor(condition: str) -> float:
 def design_compressive_strength(beam:str,W:float,L:float,fy:float,psf:float,condition:str)->float:
     """
     Returns the design compressive strength of the member as per Cl.7.1 of IS 800:2007
-    where, beam=the beam section
+            
+    Parameters:
+            beam=the beam section
             W=weight of the beam
             L=length of the beam
             fy=yield stress,MPa
