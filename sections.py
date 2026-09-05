@@ -193,6 +193,7 @@ def section_classification(bf: float,tf: float,tw: float,d: float,fy: float) -> 
         "slender": 4
     }
 
+    #The governing class will be the worse of flange class and web class
     if classes[flange_class] >= classes[web_class]:
         return flange_class
     else:
