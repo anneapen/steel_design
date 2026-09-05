@@ -1,4 +1,5 @@
 import pandas as pd
+import math
 
 
 def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float]:
@@ -151,3 +152,48 @@ def rolled_steel_tee_bar(tee_bar:str,W:float)->float:
     ryy = steel_tee_bar["ryy"]    
 
     return Area, h,b,tf,tw,Ixx,Iyy,rxx,ryy
+
+def section_classification(bf: float,tf: float,tw: float,d: float,fy: float) -> str:
+    """
+    Returns the governing class of the section as per Table 2 of IS 800:2007
+    """
+
+    epsilon = math.sqrt(250 / fy)
+
+    # Flange outstand
+    b = (bf - tw) / 2
+
+    flange_ratio = b / tf
+    web_ratio = d / tw
+
+    # Flange classification
+    if flange_ratio <= 9.4 * epsilon:
+        flange_class = "plastic"
+    elif flange_ratio <= 10.5 * epsilon:
+        flange_class = "compact"
+    elif flange_ratio <= 15.7 * epsilon:
+        flange_class = "semi-compact"
+    else:
+        flange_class = "slender"
+
+    # Web classification for web subjected to bending
+    if web_ratio <= 84 * epsilon:
+        web_class = "plastic"
+    elif web_ratio <= 105 * epsilon:
+        web_class = "compact"
+    elif web_ratio <= 126 * epsilon:
+        web_class = "semi-compact"
+    else:
+        web_class = "slender"
+
+    classes = {
+        "plastic": 1,
+        "compact": 2,
+        "semi-compact": 3,
+        "slender": 4
+    }
+
+    if classes[flange_class] >= classes[web_class]:
+        return flange_class
+    else:
+        return web_class

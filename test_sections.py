@@ -33,3 +33,7 @@ def test_rolled_steel_unequal_angle():
 def test_rolled_steel_tee_bar():
     Area, h,b,tf,tw,Ixx,Iyy,rxx,ryy=sections.rolled_steel_tee_bar("ISNT 20",8.8)
     assert (Area, h,b,tf,tw,Ixx,Iyy,rxx,ryy)==(1.13, 20.0, 20.0, 3.0, 3.0, 0.4, 0.2, 0.59, 0.39)
+
+def test_section_classification():
+    section_class=sections.section_classification(200,10,8,300,250)
+    assert section_class=='compact'
