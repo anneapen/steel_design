@@ -2,6 +2,7 @@ import math
 
 def bending_strengh_laterally_supported(section:str,Ze:float,Zp:float,fy:float,gamma_mo:float)->float:
     """
+    Returns the design bending strength for a laterally supported beam
     """
     if section=='plastic' or section=='compact':
         beta=1
