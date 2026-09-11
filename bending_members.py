@@ -17,6 +17,29 @@ def bending_strengh_laterally_supported(section:str,Ze:float,Zp:float,fy:float,g
     
     return round(Md,2)
 
+def bending_strengh_laterally_unsupported(section:str,Ze:float,Zp:float,fy:float,gamma_m0:float,lambda_LT: float,alpha_LT: float)->float:
+    """
+    Returns the design bending strength for a laterally supported beam
+    """
+    if section=='plastic' or section=='compact':
+        beta=1
+    elif section=='semi-compact':
+        beta=Ze/Zp
+    else:
+        raise ValueError ("Section should be plastic or compact or semi compact")
+
+    phi_LT = 0.5 * (1+ alpha_LT *(lambda_LT - 0.2)+ lambda_LT**2    )
+
+    chi_LT = 1 / (phi_LT+ (phi_LT**2- lambda_LT**2)**0.5)
+
+    fbd = chi_LT * fy / gamma_m0
+
+    Md = beta * Zp * fbd
+
+    return round(Md * 1e-6, 2)
+
+
+
 def design_shear_strength(Av:float,fy:float,gamma_mo:float)->float:
     """
     Returns the design shear strength
