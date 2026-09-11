@@ -18,5 +18,5 @@ def design_shear_strength(Av:float,fy:float,gamma_mo:float)->float:
     """
     Returns the design shear strength
     """
-    Vd=(Av*fy)/(math.sqrt(3)*gamma_mo)
-    return Vd
+    Vd=(Av*fy)/(math.sqrt(3)*gamma_mo)*10**-3
+    return round(Vd,2)
