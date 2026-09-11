@@ -15,3 +15,6 @@ def test_flange_plastic_moment():
 def test_reduced_bending_strength():
     Mdv=bending_members.reduced_bending_strength(250,350,200,150)
     assert Mdv==190.82
+
+def test_deflection_check():
+    assert bending_members.deflection_check(12.5,6000,300)==True

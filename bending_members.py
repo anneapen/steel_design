@@ -48,3 +48,8 @@ def reduced_bending_strength(Vu: float,Vd: float,Md: float,Mfd: float) -> float:
     
         return round(Mdv, 2)
 
+def deflection_check(actual_deflection: float,span: float,limit_ratio: float) -> bool:
+
+    allowable_deflection = span / limit_ratio
+
+    return actual_deflection <= allowable_deflection
