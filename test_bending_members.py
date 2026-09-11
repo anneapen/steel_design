@@ -7,3 +7,7 @@ def test_bending_strengh_laterally_supported():
 def test_design_shear_strength():
     Vd=bending_members.design_shear_strength(2800,250,1.1)
     assert Vd==367.4
+
+def test_flange_plastic_moment():
+    MZp=bending_members.flange_plastic_moment(400,200,16,250,1.1)
+    assert MZp==279.27

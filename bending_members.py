@@ -33,3 +33,4 @@ def flange_plastic_moment(h: float,bf: float,tf: float,fy: float, gamma_m0: floa
     Mfd = (Zpf * fy) / gamma_m0
 
     return round(Mfd * 1e-6, 2)
+
