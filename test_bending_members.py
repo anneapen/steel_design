@@ -11,3 +11,7 @@ def test_design_shear_strength():
 def test_flange_plastic_moment():
     MZp=bending_members.flange_plastic_moment(400,200,16,250,1.1)
     assert MZp==279.27
+
+def test_reduced_bending_strength():
+    Mdv=bending_members.reduced_bending_strength(250,350,200,150)
+    assert Mdv==190.82
