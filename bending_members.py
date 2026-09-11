@@ -34,3 +34,17 @@ def flange_plastic_moment(h: float,bf: float,tf: float,fy: float, gamma_m0: floa
 
     return round(Mfd * 1e-6, 2)
 
+def reduced_bending_strength(Vu: float,Vd: float,Md: float,Mfd: float) -> float:
+    """
+    Returns the reduced bending strength for high shear
+    """
+
+    if Vu <= 0.6 * Vd:
+        return Md
+    else:
+        beta = ((2 * Vu / Vd) - 1) ** 2
+    
+        Mdv = Md - beta * (Md - Mfd)
+    
+        return round(Mdv, 2)
+
