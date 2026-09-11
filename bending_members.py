@@ -23,3 +23,13 @@ def design_shear_strength(Av:float,fy:float,gamma_mo:float)->float:
     """
     Vd=(Av*fy)/(math.sqrt(3)*gamma_mo)*10**-3
     return round(Vd,2)
+
+def flange_plastic_moment(h: float,bf: float,tf: float,fy: float, gamma_m0: float) -> float:
+    """
+    Returns the plastic moment of flange
+    """
+    Zpf = bf * tf * (h - tf)
+
+    Mfd = (Zpf * fy) / gamma_m0
+
+    return round(Mfd * 1e-6, 2)
