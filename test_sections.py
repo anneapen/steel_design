@@ -1,12 +1,16 @@
 import sections as sections
 
 def test_rolled_steel_beam():
-    Area,h,bf,tf,rzz,ryy=sections.rolled_steel_beam("ISHB 350", 710.20)
+    Area,h,bf,tf,tw,Ixx,Iyy,Zxx,rzz,ryy=sections.rolled_steel_beam("ISHB 350", 710.20)
     assert Area ==92.21
     assert h==350
     assert bf==250
     assert tf==11.6
-    assert rzz ==14.65
+    assert tw==10.1
+    assert Ixx ==19802.8
+    assert Iyy==2510.5
+    assert Zxx==1131.6
+    assert rzz==14.65
     assert ryy==5.22
 
 def test_buckling_class():

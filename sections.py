@@ -16,10 +16,14 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float]:
     h = steel_beam["h"]
     bf = steel_beam["bf"]
     tf = steel_beam["tf"]
-    rzz = steel_beam["rzz"]
-    ryy = steel_beam["ryy"]
+    tw = steel_beam["tw"]
+    Ixx = steel_beam["Ixx"]
+    Iyy = steel_beam["Iyy"]
+    Zxx=steel_beam["Zxx"]
+    rzz=steel_beam["rzz"]
+    ryy=steel_beam["ryy"]
 
-    return Area, h, bf, tf, rzz, ryy
+    return Area, h, bf, tf,tw, Ixx, Iyy,Zxx,rzz,ryy
 
 def buckling_class(beam:str,W:float)->str:
     """
@@ -29,7 +33,7 @@ def buckling_class(beam:str,W:float)->str:
     h=section[1]
     bf=section[2]
     tf=section[3]
-    rzz,ryy=section[4],section[5]
+    rzz,ryy=section[8],section[9]
         
     rmin=min(ryy,rzz)
 
