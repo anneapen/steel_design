@@ -35,7 +35,7 @@ def bending_strengh_laterally_unsupported(section:str,Ze:float,Zp:float,fy:float
     fbd = chi_LT * fy / gamma_m0
 
     Md = beta * Zp * fbd
-
+ 
     return round(Md * 1e-6, 2)
 
 
