@@ -9,8 +9,7 @@ def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float]:
     df=df.set_index('Section')
     rolled_steel_beam=df.copy()
     condition = ((rolled_steel_beam.index == beam) & (rolled_steel_beam["W_N/m"] == W))
-    steel_beam = rolled_steel_beam.loc[condition].iloc[0]
-    
+    steel_beam = rolled_steel_beam.loc[condition].iloc[0]    
 
     Area = steel_beam["Area"]
     h = steel_beam["h"]
