@@ -201,3 +201,19 @@ def section_classification(bf: float,tf: float,tw: float,d: float,fy: float) -> 
         return flange_class
     else:
         return web_class
+
+
+def section_modulus(beam:str,W:float):
+    """
+    Returns the section modulus Zp & Ze of the given beam
+    """
+    section=rolled_steel_beam(beam,W)
+    Zxx=section[7]
+    h=section[1]
+    bf=section[2]
+    tf=section[3]
+    tw=section[4]
+    Ze=Zxx*1000
+    Zp=(bf * tf * (h - tf)+ (tw * (h - 2 * tf)**2) / 4)
+    
+    return round(Ze,2),round(Zp,2)

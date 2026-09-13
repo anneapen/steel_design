@@ -41,3 +41,7 @@ def test_rolled_steel_tee_bar():
 def test_section_classification():
     section_class=sections.section_classification(200,10,8,300,250)
     assert section_class=='compact'
+
+def test_section_modulus():
+    Ze,Zp=sections.section_modulus('ISHB 350',710.2)
+    assert Ze,Zp==(1131600.0, 1251025.56)
