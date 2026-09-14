@@ -23,3 +23,12 @@ def test_reduced_bending_strength():
 def test_deflection_check():
     assert bending_members.deflection_check(12.5,6000,300)==True
 
+def test_design_beam():
+    assert bending_members.design_beam(beam='ISHB 350',W=710.20,
+    fy=250,
+    Mu=150,
+    Vu=100,
+    laterally_supported=True,
+    actual_deflection=12,
+    span=6000,
+    limit_ratio=300)==True
