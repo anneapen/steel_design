@@ -1,4 +1,6 @@
 import math
+import sections as sections
+
 
 def bending_strengh_laterally_supported(section:str,Ze:float,Zp:float,fy:float,gamma_m0:float)->float:
     """
@@ -79,3 +81,46 @@ def deflection_check(actual_deflection: float,span: float,limit_ratio: float) ->
     allowable_deflection = span / limit_ratio
 
     return actual_deflection <= allowable_deflection
+
+def design_beam(beam:str,W:float,fy:float,Mu:float,Vu:float,laterally_supported: bool,
+               actual_deflection:float,span:float,limit_ratio:float,lambda_LT:float|None=None):
+    """
+    Returns whether the designed beam is safe or not
+    """
+    section=sections.rolled_steel_beam(beam,W)
+    h=section[1]
+    bf=section[2]
+    tf=section[3]
+    tw=section[4]
+    
+    section_class=sections.section_classification(bf,tf,tw,h,fy)
+    Ze,Zp=sections.section_modulus(beam,W)
+    gamma_m0=1.1
+    
+    if laterally_supported:
+        Md=bending_strengh_laterally_supported(section_class,Ze,Zp,fy,gamma_m0)
+    else:
+        if lambda_LT is None:
+            raise ValueError("lambda_LT must be provided for a laterally unsupported beam")
+        Md=bending_strengh_laterally_unsupported(section_class,Ze,Zp,fy,gamma_m0,lambda_LT)
+        
+
+    Vd=design_shear_strength(h,tw,fy,gamma_m0)
+    
+    if Vu > Vd:
+        print("Revise the section")
+        return False
+    
+    if Vu>0.6*Vd:
+        Mfd=flange_plastic_moment(h,bf,tf,fy,gamma_m0)
+        Md=reduced_bending_strength(Vu,Vd,Md,Mfd)
+
+    def_check=deflection_check(actual_deflection,span,limit_ratio)
+
+    if Mu<=Md and def_check:
+        print("Section is safe")
+        return True
+    else:
+        print("Revise the section")
+        return False
+        
