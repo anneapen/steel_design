@@ -9,7 +9,7 @@ def test_bending_strengh_laterally_unsupported():
     assert Md==217.01
 
 def test_design_shear_strength():
-    Vd=bending_members.design_shear_strength(2800,250,1.1)
+    Vd=bending_members.design_shear_strength(280,10,250,1.1)
     assert Vd==367.4
 
 def test_flange_plastic_moment():

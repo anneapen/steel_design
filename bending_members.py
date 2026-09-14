@@ -30,7 +30,7 @@ def bending_strengh_laterally_unsupported(section:str,Ze:float,Zp:float,fy:float
     else:
         raise ValueError ("Section should be plastic or compact or semi compact")
 
-    phi_LT = 0.5 * (1+ alpha_LT *(lambda_LT - 0.2)+ lambda_LT**2    )
+    phi_LT = 0.5 * (1+ alpha_LT *(lambda_LT - 0.2)+ lambda_LT**2)
 
     chi_LT = 1 / (phi_LT+ (phi_LT**2- lambda_LT**2)**0.5)
 
@@ -42,10 +42,11 @@ def bending_strengh_laterally_unsupported(section:str,Ze:float,Zp:float,fy:float
 
 
 
-def design_shear_strength(Av:float,fy:float,gamma_mo:float)->float:
+def design_shear_strength(h:float,tw:float,fy:float,gamma_mo:float)->float:
     """
     Returns the design shear strength
     """
+    Av=h*tw
     Vd=(Av*fy)/(math.sqrt(3)*gamma_mo)*10**-3
     return round(Vd,2)
 
