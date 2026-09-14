@@ -5,7 +5,7 @@ def test_bending_strengh_laterally_supported():
     assert Md==181.82
 
 def test_bending_strengh_laterally_unsupported():
-    Md=bending_members.bending_strengh_laterally_unsupported('compact',1050000,1200000,250,1.1,0.8,0.21)
+    Md=bending_members.bending_strengh_laterally_unsupported('compact',1050000,1200000,250,1.1,0.8)
     assert Md==217.01
 
 def test_design_shear_strength():

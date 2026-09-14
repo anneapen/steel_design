@@ -17,10 +17,11 @@ def bending_strengh_laterally_supported(section:str,Ze:float,Zp:float,fy:float,g
     
     return round(Md,2)
 
-def bending_strengh_laterally_unsupported(section:str,Ze:float,Zp:float,fy:float,gamma_m0:float,lambda_LT: float,alpha_LT: float)->float:
+def bending_strengh_laterally_unsupported(section:str,Ze:float,Zp:float,fy:float,gamma_m0:float,lambda_LT: float)->float:
     """
     Returns the design bending strength for a laterally supported beam
     """
+    alpha_LT=0.21
     if section=='plastic' or section=='compact':
         beta=1
     elif section=='semi-compact':
