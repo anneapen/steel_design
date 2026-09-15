@@ -104,17 +104,19 @@ def design_beam(beam:str,W:float,fy:float,Mu:float,Vu:float,laterally_supported:
             raise ValueError("lambda_LT must be provided for a laterally unsupported beam")
         Md=bending_strengh_laterally_unsupported(section_class,Ze,Zp,fy,gamma_m0,lambda_LT)
         
-
+    #Shear strength
     Vd=design_shear_strength(h,tw,fy,gamma_m0)
     
     if Vu > Vd:
         print("Revise the section")
         return False
-    
+
+    #Check for high shear
     if Vu>0.6*Vd:
         Mfd=flange_plastic_moment(h,bf,tf,fy,gamma_m0)
         Md=reduced_bending_strength(Vu,Vd,Md,Mfd)
 
+    #Deflection check
     def_check=deflection_check(actual_deflection,span,limit_ratio)
 
     if Mu<=Md and def_check:
