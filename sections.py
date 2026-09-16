@@ -4,6 +4,7 @@ import math
 
 def rolled_steel_beam(beam:str,W:float)->tuple[float,float,float,float,float]:
     """
+    Returns the sectional properties for the given rolled steel beam
     """
     df=pd.read_csv('rolled_steel_beams.csv')
     df=df.set_index('Section')
@@ -205,7 +206,7 @@ def section_classification(bf: float,tf: float,tw: float,d: float,fy: float) -> 
 
 def section_modulus(beam:str,W:float):
     """
-    Returns the section modulus Zp & Ze of the given beam
+    Returns the section modulus Zp & Ze of the given rolled steel beam
     """
     section=rolled_steel_beam(beam,W)
     Zxx=section[7]
